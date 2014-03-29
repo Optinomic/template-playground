@@ -4,11 +4,14 @@
     <div class="row">
         <div class="col-md-4">
 
-            <h3 class="m">Description</h3>
+            <h3 class="m">Documentation & Settings</h3>
+
 
 
             <div class="card">
                 <div class="card__item">
+
+                    <card-title title="'Nice Title'" subtitle="'Create a nice looking title, with or without a sub-titel and info-line.'"></card-title>
 
                     <div class="m">
                         <p>Title</p>
@@ -16,16 +19,16 @@
                     </div>
                     <div class="m">
                         <p>Subtitle</p>
-                        <input ng-model="templates_titel_titel_2" type="text" class="form-control" placeholder="Title">
+                        <input ng-model="templates_titel_titel_2" type="text" class="form-control" placeholder="Sub-Title">
                     </div>
                     <div class="m">
                         <p>Patient / Date Info</p>
-                        <input ng-model="templates_titel_titel_3" type="text" class="form-control" placeholder="Title">
+                        <input ng-model="templates_titel_titel_3" type="text" class="form-control" placeholder="Info (Patient or Date...)">
                     </div>
 
                     <div class="m">
                         <p>Copy / Paste:</p>
-                        <textarea class="form-control t_l" rows="16">&lt;card-titel titel="&#39;{{templates_titel_titel_1}}&#39;" subtitel="&#39;{{templates_titel_titel_2}}&#39;" patient="&#39;{{templates_titel_titel_3}}&#39;"&gt;&lt;/card-titel&gt;</textarea>
+                        <textarea class="form-control t_l" rows="10">&lt;card-title title="&#39;{{templates_titel_titel_1}}&#39;" subtitle="&#39;{{templates_titel_titel_2}}&#39;" info="&#39;{{templates_titel_titel_3}}&#39;"&gt;&lt;/card-title&gt;</textarea>
                     </div>
 
 
@@ -39,10 +42,12 @@
 
 
             <div class="card">
-                <card-titel
-                        titel="'Lebenszufriedenheit und Glück'"
-                        subtitel="'Persönliche Verhaltensweisen und Gewohnheiten, 33 Aussagen.'"
-                        patient="patient.lastName + ' ' + patient.firstName"></card-titel>
+
+                <card-title
+                        title="templates_titel_titel_1"
+                        subtitle="templates_titel_titel_2"
+                        info="templates_titel_titel_3"></card-title>
+
 
 
                 <div class="card__item">
@@ -55,12 +60,13 @@
 
 
             <div class="m">
-                Minimal-Version: <code>&lt;card-titel titel="&#39;{{templates_titel_titel_1}}&#39;"&gt;&lt;/card-titel&gt;</code>
+                Minimal-Version: <code>&lt;card-title title="&#39;{{templates_titel_titel_1}}&#39;"&gt;&lt;/card-titel&gt;</code>
             </div>
+
 
             <div class="card">
 
-                <card-titel titel="'Lebenszufriedenheit und Glück'"></card-titel>
+                <card-title title="templates_titel_titel_1"></card-title>
 
                 <div class="card__item">
                     <p>Your content goes here / Hier wird Ihre Auswertung dargestellt :: Lorem ipsum dolor sit amet,
