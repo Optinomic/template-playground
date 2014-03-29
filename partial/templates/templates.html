@@ -1,0 +1,86 @@
+<div class="col-md-12" ng-controller="TemplatesCtrl">
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+            <h3 class="m">Description</h3>
+
+
+            <div class="card">
+                <div class="card__item">
+
+                    <div class="m">
+                        <p>Title</p>
+                        <input ng-model="templates_titel_titel_1" type="text" class="form-control" placeholder="Title">
+                    </div>
+                    <div class="m">
+                        <p>Subtitle</p>
+                        <input ng-model="templates_titel_titel_2" type="text" class="form-control" placeholder="Title">
+                    </div>
+                    <div class="m">
+                        <p>Patient / Date Info</p>
+                        <input ng-model="templates_titel_titel_3" type="text" class="form-control" placeholder="Title">
+                    </div>
+
+                    <div class="m">
+                        <p>Copy / Paste:</p>
+                        <textarea class="form-control t_l" rows="16">&lt;card-titel titel="{{templates_titel_titel_1}}" subtitel="{{templates_titel_titel_2}}" patient="{{templates_titel_titel_3}}"&gt;&lt;/card-titel&gt;</textarea>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-9">
+            <h3 class="m">Preview</h3>
+
+
+
+            <div class="card">
+                <card-titel
+                        titel="'Lebenszufriedenheit und Glück'"
+                        subtitel="'Persönliche Verhaltensweisen und Gewohnheiten, 33 Aussagen.'"
+                        patient="patient.lastName + ' ' + patient.firstName"></card-titel>
+
+
+                <div class="card__item">
+                    <p>Your content goes here / Hier wird Ihre Auswertung dargestellt :: Lorem ipsum dolor sit amet,
+                        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                        aliquyam erat, sed diam voluptua. Stet clita kasd gubergren. Lorem ipsum dolor sit amet. Stet
+                        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                </div>
+            </div>
+
+
+
+            <div class="m">
+                Minimal-Version: <code>&lt;card-titel titel="{{templates_titel_titel_1}}"&gt;&lt;/card-titel&gt;</code>
+            </div>
+
+            <div class="card">
+
+                <card-titel titel="'Lebenszufriedenheit und Glück'"></card-titel>
+
+                <div class="card__item">
+                    <p>Your content goes here / Hier wird Ihre Auswertung dargestellt :: Lorem ipsum dolor sit amet,
+                        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                        aliquyam erat, sed diam voluptua. Stet clita kasd gubergren. Lorem ipsum dolor sit amet. Stet
+                        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
