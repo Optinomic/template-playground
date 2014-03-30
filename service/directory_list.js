@@ -4,11 +4,16 @@ angular.module('optinomic').factory('directoryList',function() {
 
     var optinomic_directories = [
         {
-            "tag":"card-title",
             "title":"Title / Subtitle with Infoline",
             "version":"1.0",
             "lastUpdate":"2014-03-30",
-            "id" : 1
+            "id" : "card-title"
+        },
+        {
+            "title":"Stanine",
+            "version":"1.0",
+            "lastUpdate":"2014-03-30",
+            "id" : "stanine"
         }
     ];
 

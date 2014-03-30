@@ -19,11 +19,29 @@
                     <div class="m">
                         <div class="pull-right">
                             <a class="button button--outline button--primary m_b" href="#/template/{{dir.id}}">
-                                &lt;card-title&gt;
+                                &lt;{{dir.id}}&gt;
                             </a>
                         </div>
-                       <p class="dir_title">{{dir.title}}</p>
-                        <code>&lt;{{dir.tag}}&gt;&lt;/{{dir.tag}}&gt;</code>
+                        <p class="dir_title">{{dir.title}}</p>
+                        <code>&lt;{{dir.id}}&gt;&lt;/{{dir.id}}&gt;</code>
+                        <p>Version: {{dir.version}} | Last updated: {{dir.lastUpdate}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card__item">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 b_t">
+                    <div class="t_c m">
+                        <p>Optinomic - Templates are powered by</p>
+
+                        <div class="m_t">
+                            <a href="http://angularjs.org/">
+                                <img src="http://angularjs.org/img/AngularJS-large.png"></img>
+                            </a>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
