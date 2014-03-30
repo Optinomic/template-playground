@@ -6,8 +6,9 @@
         <div class="card">
             <div class="card__item">
 
-                <card-title title="current_directive_id"
-                            subtitle="'Comming soon.'"></card-title>
+                <card-title title="current_directive.title"
+                            subtitle="current_directive.description"
+                            info="'V' + current_directive.version + ' &nbsp; | &nbsp; ' + current_directive.lastUpdate"></card-title>
             </div>
         </div>
     </div>
@@ -29,18 +30,19 @@
 </div>
 
 <div>
-    <h3 class="m">Preview</h3>
+    <h3 class="m">Preview of:<br>
+        <code>&lt;{{current_directive_id}} param="&#39;xXx&#39;"&gt;&lt;/{{current_directive_id}}&gt;</code>
+    </h3>
 
 
     <div class="card">
         <div class="card__item">
-
-            <p>directive goes here</p>
+            <p>directive comes here</p>
 
         </div>
 
         <div class="card__item">
-            <p>Your other content goes here / Hier wird Ihre Auswertung dargestellt :: Lorem ipsum dolor sit amet,
+            <p>Other content goes here / Hier wird Ihre Auswertung dargestellt :: Lorem ipsum dolor sit amet,
                 consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
                 aliquyam erat, sed diam voluptua. Stet clita kasd gubergren. Lorem ipsum dolor sit amet. Stet
                 clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
