@@ -31,6 +31,7 @@
 <script src="partial/home/home.js"></script>
 <script src="partial/templates/templates.js"></script>
 <script src="directive/card-title/card-title.js"></script>
+<script src="service/directory_list.js"></script>
 <!-- Add New Component JS Above -->
 
 <div ng-controller="HomeCtrl">
@@ -41,10 +42,16 @@
             <div class="col-md-2" style="min-height: 100%;">
                 <h3 class="m">Optinomic Directives</h3>
 
-                <div class="button button--outline button--primary button--block m_b">
-                    &lt;card-title&gt;
+                <div class="m">
+                    <a class="button button--outline button--primary button--block m_b" href="#/home">
+                        Home
+                    </a>
                 </div>
-
+                <div class="m" ng-repeat="dir in directives">
+                    <a class="button button--outline button--primary button--block m_b" href="#/template/{{dir.id}}">
+                        &lt;card-title&gt;
+                    </a>
+                </div>
 
 
             </div>

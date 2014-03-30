@@ -1,17 +1,32 @@
 <div class="col-md-12" ng-controller="HomeCtrl">
 
+    <style>
+        .dir_title {
+            font-size: 1.5em;
+        }
+    </style>
 
-    <card-titel></card-titel>
 
-
-    <div class="container card">
-        <h1>The following directives are available:</h1>
-
-        <a href="#/template/1">
-            Titel
-            <code>&lt;card-titel&gt;&lt;/card-titel&gt;</code>
-        </a>
-
+    <div class="card">
+        <div class="card__item">
+            <card-title title="'Optinomic :: template-directives'"
+                        subtitle="'Welcome to our palyground! The following directives are available:'"
+                        info="'Create nice looking health-care apps.'"></card-title>
+        </div>
+        <div class="card__item" ng-repeat="dir in directives">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 b_t">
+                    <div class="m">
+                        <div class="pull-right">
+                            <a class="button button--outline button--primary m_b" href="#/template/{{dir.id}}">
+                                &lt;card-title&gt;
+                            </a>
+                        </div>
+                       <p class="dir_title">{{dir.title}}</p>
+                        <code>&lt;{{dir.tag}}&gt;&lt;/{{dir.tag}}&gt;</code>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </div>
