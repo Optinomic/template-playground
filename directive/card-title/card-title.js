@@ -22,7 +22,7 @@ angular.module('optinomic').directive('cardTitle', function() {
 		//templateUrl: 'directive/card-title/card-title.html',
 		link: function(scope, element, attrs, ngModel) {
 
-
+            
             function updateStuff() {
                 // Empty Title
                 if ((scope.mytitle1 === undefined) || (scope.mytitle1 === '')) {

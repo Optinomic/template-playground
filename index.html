@@ -14,6 +14,7 @@
 <!-- JS from Bower Components -->
 <script src="bower_components/less.js/dist/less-1.6.2.js" data-build="exclude"></script>
 <script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/d3/d3.v2.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/moment/moment.js"></script>
@@ -30,6 +31,7 @@
 <script src="app.js"></script>
 <script src="partial/home/home.js"></script>
 <script src="partial/templates/templates.js"></script>
+<script src="directive/optinomic-logo/optinomic-logo.js"></script>
 <script src="directive/card-title/card-title.js"></script>
 <script src="service/directory_list.js"></script>
 <script src="directive/score-threshold/score-threshold.js"></script>
@@ -38,16 +40,28 @@
 <div ng-controller="HomeCtrl">
     <div id="content" class="container">
 
+        <optinomic-logo
+                size=50
+                background="white"
+                fill="#EE3B16"
+                animation="20"
+                stroke="white"
+                stroke-width=2
+                logo-src="../src/optinomic.svg"></optinomic-logo>
+
 
         <div class="row">
             <div class="col-md-2" style="min-height: 100%;">
-                <h3 class="m">Optinomic Directives</h3>
+
+
+                <h3 class="m">Directives</h3>
 
                 <div class="m">
                     <a class="button button--outline button--primary button--block m_b" href="#/home">
                         Home
                     </a>
                 </div>
+
                 <div class="m" ng-repeat="dir in directives">
                     <a class="button button--outline button--primary button--block m_b" href="#/template/{{dir.id}}">
                         &lt;{{dir.id}}&gt;

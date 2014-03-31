@@ -14,9 +14,9 @@ angular.module('optinomic').directive('scoreThreshold', function() {
 
             function just_do_it() {
 
-                scope.score = scope.myscore
-                scope.max = scope.mymax
-                scope.min = scope.mymin
+                scope.score = scope.myscore;
+                scope.max = scope.mymax;
+                scope.min = scope.mymin;
 
                 scope.postition = (100/(scope.max - scope.min)*scope.score)/100;
                 scope.postition = scope.postition * 85 + 7;

@@ -4,6 +4,13 @@ angular.module('optinomic').factory('directoryList',function() {
 
     var optinomic_directories = [
         {
+            "title":"Optinomic Logo",
+            "description":"Show us your love.",
+            "version":"1.0",
+            "lastUpdate":"2014-03-31",
+            "id" : "optinomic-logo"
+        },
+        {
             "title":"Title / Subtitle with Infoline",
             "description":"A nice looking title for your cards.",
             "version":"1.0",
