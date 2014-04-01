@@ -1,7 +1,7 @@
 <div>
 
     <div class="row m">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
 
 
             <div id="svg_box">
@@ -9,12 +9,12 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="grad_entry" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#EDEDED;stop-opacity:1" />
+                            <stop offset="0%" style="stop-color:#FAFAFA;stop-opacity:1" />
                             <stop offset="100%" style="stop-color:lightgrey;stop-opacity:1" />
                         </linearGradient>
                         <linearGradient id="grad_exit" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" style="stop-color:lightgrey;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#EDEDED;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FAFAFA;stop-opacity:1" />
                         </linearGradient>
                     </defs>
 
@@ -43,23 +43,25 @@
                     </g>
 
                     <g fill="none">
-                        <line x1="{{postition}}" y1="21" x2="{{postition}}" y2="79" style="stroke:white;stroke-width:3" />
-                        <line x1="{{postition}}" y1="21" x2="{{postition}}" y2="79" style="stroke:rgb(255,0,0);stroke-width:2" />
-                        <rect x="{{postition}}" y="21" width="0.2" height="59" fill="black" />
+                        <line ng-attr-x1="{{postition}}" y1="0" ng-attr-x2="{{postition}}" y2="100" style="stroke:white;stroke-width:3" />
+                        <line ng-attr-x1="{{postition}}" y1="0" ng-attr-x2="{{postition}}" y2="100" style="stroke:rgb(255,0,0);stroke-width:2" />
+                        <rect ng-attr-x="{{postition}}" y="0" width="0.2" height="100" fill="black" />
                     </g>
 
-                    <text x="{{postition}}" y="50" fill="red">{{score}}</text>
-                    
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+                        <g ng-show="show_min_max" fill="none">
+                            <text x="6" text-anchor="end" y="4.8" font-family="Verdana" font-size="2" fill="#C2C2C2">Min</text>
+                            <text x="6" text-anchor="end" y="7.25" font-family="Verdana" font-size="2" fill="black">{{min}}</text>
+                            <text x="93" text-anchor="start" y="4.8" font-family="Verdana" font-size="2" fill="#C2C2C2">Max</text>
+                            <text x="93" text-anchor="start" y="7.25" font-family="Verdana" font-size="2" fill="black">{{max}}</text>
+                        </g>
+                        <text ng-attr-x="{{postition_score}}" ng-attr-text-anchor="{{postition_align}}" y="7.25" font-family="Verdana" font-size="6" fill="black">{{score}}</text>
+                    </svg>
+
                 </svg>
 
 
 
-            </div>
-            <div style="margin-top: 33px;">
-                <p class="pull-left m">
-                    <small>Min.</small>{{min}}</p>
-                <p class="pull-right m">{{max}}
-                    <small>Max.</small>&nbsp;</p>
             </div>
 
         </div>
