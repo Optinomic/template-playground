@@ -21,10 +21,14 @@
 
                     <rect x="0" y="0" width="100" height="100" fill="#FAFAFA" />
                     <rect x="7" y="20" width="85" height="60" fill="lightgrey" />
-                    <rect x="7" y="20" width="23" height="60" fill="url(#grad_entry)" />
-                    <rect x="69" y="20" width="23" height="60" fill="url(#grad_exit)" />
+                    <rect x="7" y="20" width="33" height="60" fill="url(#grad_entry)" />
+                    <rect x="59" y="20" width="33" height="60" fill="url(#grad_exit)" />
+                    <line x1="7" y1="20" x2="92" y2="20" style="stroke:#C2C2C2;stroke-width:2" />
+                    <line x1="7" y1="50" x2="92" y2="50" style="stroke:#C2C2C2;stroke-width:2" />
+                    <line x1="7" y1="80" x2="92" y2="80" style="stroke:#C2C2C2;stroke-width:2" />
 
-                    <g fill="none">
+
+                    <g ng-show="show_percent_scale" fill="none">
                         <rect x="15.5" y="45" width="0.2" height="10" fill="#C2C2C2" />
                         <rect x="24" y="45" width="0.2" height="10" fill="#C2C2C2" />
                         <rect x="32.5" y="45" width="0.2" height="10" fill="#C2C2C2" />
@@ -36,26 +40,36 @@
                         <rect x="83.5" y="45" width="0.2" height="10" fill="#C2C2C2" />
                     </g>
 
-                    <g fill="none">
-                        <path stroke="#C2C2C2" d="M7 20 l85 0" />
-                        <path stroke="#C2C2C2" d="M7 50 l85 0" />
-                        <path stroke="#C2C2C2" d="M7 80 l85 0" />
+                    <g ng-show="show_scale_ranges" fill="none">
+                        <rect ng-repeat="range in myshow_scale_ranges.ranges" opacity="0.8" ng-attr-x="{{range.from_position}}" y="20" ng-attr-width="{{range.width_position}}" height="60" ng-attr-fill="{{range.fill_color}}" />
                     </g>
 
                     <g fill="none">
-                        <line ng-attr-x1="{{postition}}" y1="0" ng-attr-x2="{{postition}}" y2="100" style="stroke:white;stroke-width:3" />
-                        <line ng-attr-x1="{{postition}}" y1="0" ng-attr-x2="{{postition}}" y2="100" style="stroke:rgb(255,0,0);stroke-width:2" />
-                        <rect ng-attr-x="{{postition}}" y="0" width="0.2" height="100" fill="black" />
+                        <rect ng-hide="show_scale_ranges" x="7" y="20" ng-attr-width="{{postition-7}}" height="60" fill="blue" opacity="0.1">
+                            <animate attributeName="opacity" attributeType="CSS" begin="0s" dur="3s" fill="freeze" from="0" to="0.1" />
+                        </rect>
+                        <rect ng-show="show_scale_ranges" x="7" y="80" ng-attr-width="{{postition-7}}" height="15" fill="blue" opacity="1">
+                            <animate attributeName="width" attributeType="XML" from="7" ng-attr-to="{{postition-7}}" begin="0s" dur="2" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                        </rect>
+                        <rect ng-hide="show_scale_ranges" ng-attr-x="{{postition-0.8}}" y="0" width="1.6" height="100" fill="#EE3B16">
+                            <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.8}}" begin="0s" dur="2" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                        </rect>
+                        <rect ng-attr-x="{{postition-0.1}}" y="5" width="0.2" height="90" fill="black">
+                            <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.1}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                        </rect>
                     </g>
 
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
                         <g ng-show="show_min_max" fill="none">
-                            <text x="6" text-anchor="end" y="4.8" font-family="Verdana" font-size="2" fill="#C2C2C2">Min</text>
-                            <text x="6" text-anchor="end" y="7.25" font-family="Verdana" font-size="2" fill="black">{{min}}</text>
-                            <text x="93" text-anchor="start" y="4.8" font-family="Verdana" font-size="2" fill="#C2C2C2">Max</text>
-                            <text x="93" text-anchor="start" y="7.25" font-family="Verdana" font-size="2" fill="black">{{max}}</text>
+                            <text x="6" text-anchor="end" y="4.8" font-family="Arial" font-size="2" fill="#C2C2C2">Min</text>
+                            <text x="6" text-anchor="end" y="7.25" font-family="Arial" font-size="2" fill="black">{{min}}</text>
+                            <text x="93" text-anchor="start" y="4.8" font-family="Arial" font-size="2" fill="#C2C2C2">Max</text>
+                            <text x="93" text-anchor="start" y="7.25" font-family="Arial" font-size="2" fill="black">{{max}}</text>
                         </g>
-                        <text ng-attr-x="{{postition_score}}" ng-attr-text-anchor="{{postition_align}}" y="7.25" font-family="Verdana" font-size="6" fill="black">{{score}}</text>
+
+                        <text ng-attr-x="{{postition_score}}" ng-attr-text-anchor="{{postition_align}}" y="7.25" font-family="Arial" font-size="6" fill="black">{{score}}
+                            <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition_score}}" begin="0s" dur="3s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                        </text>
                     </svg>
 
                 </svg>
