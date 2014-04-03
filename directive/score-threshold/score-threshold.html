@@ -41,20 +41,21 @@
                     </g>
 
                     <g ng-show="show_scale_ranges" fill="none">
-                        <rect ng-repeat="range in myshow_scale_ranges.ranges" opacity="0.8" ng-attr-x="{{range.from_position}}" y="20" ng-attr-width="{{range.width_position}}" height="60" ng-attr-fill="{{range.fill_color}}" />
+                        <rect ng-repeat="range in myshow_scale_ranges.ranges" ng-hide="my_current_scale === $index" opacity="0.1" ng-attr-x="{{range.from_position}}" y="35" ng-attr-width="{{range.width_position}}" height="30" fill="green" />
+                        <rect ng-repeat="range in myshow_scale_ranges.ranges" ng-show="my_current_scale === $index" opacity="0.7" ng-attr-x="{{range.from_position}}" y="30" ng-attr-width="{{range.width_position}}" height="40" fill="#EE3B16" />
                     </g>
 
                     <g fill="none">
                         <rect ng-hide="show_scale_ranges" x="7" y="20" ng-attr-width="{{postition-7}}" height="60" fill="blue" opacity="0.1">
                             <animate attributeName="opacity" attributeType="CSS" begin="0s" dur="3s" fill="freeze" from="0" to="0.1" />
                         </rect>
-                        <rect ng-show="show_scale_ranges" x="7" y="80" ng-attr-width="{{postition-7}}" height="15" fill="blue" opacity="1">
-                            <animate attributeName="width" attributeType="XML" from="7" ng-attr-to="{{postition-7}}" begin="0s" dur="2" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                        <rect ng-hide="show_scale_ranges" ng-attr-x="{{postition-0.8}}" y="0" width="1.6" height="100" opacity="0.7" fill="#EE3B16">
+                            <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.8}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
                         </rect>
-                        <rect ng-hide="show_scale_ranges" ng-attr-x="{{postition-0.8}}" y="0" width="1.6" height="100" fill="#EE3B16">
-                            <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.8}}" begin="0s" dur="2" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
+                        <rect x="7" y="85" ng-attr-width="{{postition-7}}" height="15" fill="blue" opacity="0.6">
+                            <animate attributeName="width" attributeType="XML" from="7" ng-attr-to="{{postition-7}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.7 0.3 1" keyTimes="0;1" />
                         </rect>
-                        <rect ng-attr-x="{{postition-0.1}}" y="5" width="0.2" height="90" fill="black">
+                        <rect ng-attr-x="{{postition-0.1}}" y="0" width="0.2" height="100" fill="black">
                             <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.1}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
                         </rect>
                     </g>
@@ -67,7 +68,7 @@
                             <text x="93" text-anchor="start" y="7.25" font-family="Arial" font-size="2" fill="black">{{max}}</text>
                         </g>
 
-                        <text ng-attr-x="{{postition_score}}" ng-attr-text-anchor="{{postition_align}}" y="7.25" font-family="Arial" font-size="6" fill="black">{{score}}
+                        <text ng-attr-x="{{postition_score}}" ng-attr-text-anchor="{{postition_align}}" style="stroke:white;stroke-width:0.1" y="6.8" font-family="Arial" font-size="5" fill="black">{{score}}
                             <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition_score}}" begin="0s" dur="3s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
                         </text>
                     </svg>
