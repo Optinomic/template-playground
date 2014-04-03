@@ -55,14 +55,10 @@
                         <rect x="7" y="85" ng-attr-width="{{postition-7}}" height="15" fill="blue" opacity="0.6">
                             <animate attributeName="width" attributeType="XML" from="7" ng-attr-to="{{postition-7}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.7 0.3 1" keyTimes="0;1" />
                         </rect>
-                    </g>
-                    <svg fill="none">
-                        <polygon points="7,19 6,4 8,4" fill="blue" />
-                        <polygon points="50,81 49,96 51,96" fill="blue" />
                         <rect ng-attr-x="{{postition-0.1}}" y="0" width="0.2" height="100" fill="black">
+                            <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.1}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
                         </rect>
-                        <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.1}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
-                    </svg>
+                    </g>
 
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
                         <g ng-show="show_min_max" fill="none">
@@ -72,7 +68,7 @@
                             <text x="93" text-anchor="start" y="7.25" font-family="Arial" font-size="2" fill="black">{{max}}</text>
                         </g>
 
-                        <text ng-attr-x="{{postition_score}}" ng-attr-text-anchor="{{postition_align}}" style="stroke:#FAFAFA;stroke-width:0.1" y="6.8" font-family="Arial" font-size="5" fill="black">{{score}}
+                        <text ng-attr-x="{{postition_score}}" ng-attr-text-anchor="{{postition_align}}" style="stroke:white;stroke-width:0.1" y="6.8" font-family="Arial" font-size="5" fill="black">{{score}}
                             <animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition_score}}" begin="0s" dur="3s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />
                         </text>
                     </svg>
