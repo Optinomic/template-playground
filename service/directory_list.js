@@ -18,18 +18,18 @@ angular.module('optinomic').factory('directoryList',function() {
             "id" : "card-title"
         },
         {
-            "title":"Score with threshold",
-            "description":"A simple score based on threshold. Typically BDI-II.",
+            "title":"Score (with threshold)",
+            "description":"A simple score - can be compared to thresholds. Typically BDI-II.",
             "version":"1.0",
             "lastUpdate":"2014-03-30",
             "id" : "score-threshold"
         },
         {
-            "title":"Stanine",
-            "description":"Stanine (STAndard NINE) is a method of scaling test scores on a nine-point standard scale with a mean of five and a standard deviation of two.",
+            "title":"Scale",
+            "description":"Simple 0 to 5 or Stanine (STAndard NINE) is a method of scaling test scores on a nine-point standard scale with a mean of five and a standard deviation of two.",
             "version":"1.0",
             "lastUpdate":"2014-03-30",
-            "id" : "stanine"
+            "id" : "scale"
         }
     ];
 
