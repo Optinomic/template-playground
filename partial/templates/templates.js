@@ -43,6 +43,6 @@ angular.module('optinomic').controller('TemplatesCtrl', function($scope, $routeP
             "to": 63,
             "result": "Schwere Depression"
         }]
-    }
+    };
 
 });
