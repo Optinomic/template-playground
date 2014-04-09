@@ -11,7 +11,99 @@ angular.module('optinomic').directive('scoreThreshold', function() {
             myshow_percent_scale: '=showPercentScale',
             myshow_scale_ranges: '=scaleRanges'
         },
-        templateUrl: 'directive/score-threshold/score-threshold.html',
+        //templateUrl: 'directive/score-threshold/score-threshold.html',
+        template:
+             '<div>'+
+            '<div class="row m">'+
+                '<div class="col-md-10 col-md-offset-1">'+
+
+
+                    '<div id="svg_box">'+
+
+                        '<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 100" preserveAspectRatio="none">'+
+                            '<defs>'+
+                                '<linearGradient id="grad_entry" x1="0%" y1="0%" x2="100%" y2="0%">'+
+                                    '<stop offset="0%" style="stop-color:#FAFAFA;stop-opacity:1" />'+
+                                    '<stop offset="100%" style="stop-color:lightgrey;stop-opacity:1" />'+
+                                '</linearGradient>'+
+                                '<linearGradient id="grad_exit" x1="0%" y1="0%" x2="100%" y2="0%">'+
+                                    '<stop offset="0%" style="stop-color:lightgrey;stop-opacity:1" />'+
+                                    '<stop offset="100%" style="stop-color:#FAFAFA;stop-opacity:1" />'+
+                                '</linearGradient>'+
+                            '</defs>'+
+
+
+                            '<rect x="0" y="0" width="100" height="100" fill="#FAFAFA" />'+
+                            '<rect x="7" y="20" width="85" height="60" fill="lightgrey" />'+
+                            '<rect x="7" y="20" width="33" height="60" fill="url(#grad_entry)" />'+
+                            '<rect x="59" y="20" width="33" height="60" fill="url(#grad_exit)" />'+
+                            '<line x1="7" y1="20" x2="92" y2="20" style="stroke:#C2C2C2;stroke-width:2" />'+
+                            '<line x1="7" y1="50" x2="92" y2="50" style="stroke:#C2C2C2;stroke-width:2" />'+
+                            '<line x1="7" y1="80" x2="92" y2="80" style="stroke:#C2C2C2;stroke-width:2" />'+
+
+
+                            '<g ng-show="show_percent_scale" fill="none">'+
+                                '<rect x="15.5" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                                '<rect x="24" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                                '<rect x="32.5" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                                '<rect x="41" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                                '<rect x="49.5" y="20" width="0.2" height="60" fill="#C2C2C2" />'+
+                                '<rect x="58" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                                '<rect x="66.5" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                                '<rect x="75" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                                '<rect x="83.5" y="45" width="0.2" height="10" fill="#C2C2C2" />'+
+                            '</g>'+
+
+                            '<g ng-show="show_scale_ranges" fill="none">'+
+                                '<rect ng-repeat="range in myshow_scale_ranges.ranges" ng-hide="my_current_scale === $index" opacity="0.1" ng-attr-x="{{range.from_position}}" y="35" ng-attr-width="{{range.width_position}}" height="30" fill="green" />'+
+                                '<rect ng-repeat="range in myshow_scale_ranges.ranges" ng-show="my_current_scale === $index" opacity="0.7" ng-attr-x="{{range.from_position}}" y="30" ng-attr-width="{{range.width_position}}" height="40" fill="#EE3B16" />'+
+                            '</g>'+
+
+                            '<g fill="none">'+
+                                '<rect x="7" y="85" ng-attr-width="{{postition-7}}" height="15" fill="blue" opacity="0.5">'+
+                                    '<animate attributeName="width" attributeType="XML" from="7" to="{{postition-7}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />'+
+                                '</rect>'+
+                            '</g>'+
+
+                            '<svg fill="none">'+
+                                '<rect ng-attr-x="{{postition-0.1}}" y="0" width="0.2" height="100" fill="black">'+
+                                    '<animate attributeName="x" attributeType="XML" from="7" ng-attr-to="{{postition-0.1}}" begin="0s" dur="2s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />'+
+                                '</rect>'+
+                            '</svg>'+
+
+                            '<svg fill="blue">'+
+                                '<polygon ng-attr-points="{{polygon_1}}"  />'+
+                                '<polygon points="{{polygon_2}}"  />'+
+                            '</svg>'+
+
+
+                            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">'+
+                                '<g ng-show="show_min_max" fill="none">'+
+                                    '<text x="6" text-anchor="end" y="4.8" font-family="Arial" font-size="2" fill="#C2C2C2">Min</text>'+
+                                    '<text x="6" text-anchor="end" y="7.25" font-family="Arial" font-size="2" fill="black">{{min}}</text>'+
+                                    '<text x="93" text-anchor="start" y="4.8" font-family="Arial" font-size="2" fill="#C2C2C2">Max</text>'+
+                                    '<text x="93" text-anchor="start" y="7.25" font-family="Arial" font-size="2" fill="black">{{max}}</text>'+
+                                '</g>'+
+
+                                '<text x="{{postition_score}}" text-anchor="{{postition_align}}" style="stroke:#FAFAFA;stroke-width:0.1" y="6.8" font-family="Arial" font-size="5" fill="black">' + 
+                                    '{{score}}'+
+                                    '<animate attributeName="x" attributeType="XML" from="7" to="{{postition_score}}" begin="0s" dur="3s" fill="remove" calcMode="spline" keySplines="0 0.75 0.25 1" keyTimes="0;1" />'+
+                                '</text>'+
+                            '</svg>'+
+
+                        '</svg>'+
+
+                    '</div>'+
+
+                '</div>'+
+            '</div>'+
+            '<div style="margin-top: 50px;">'+
+                '&nbsp;'+
+            '</div>'+
+
+
+        '</div>',
+ 
         link: function(scope, element, attrs, ngModel) {
 
             function get_position(my_value) {

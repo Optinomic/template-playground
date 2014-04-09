@@ -6,23 +6,15 @@
         <div class="card">
             <div class="card__item">
 
-                <card-title title="current_directive.title"
-                            subtitle="current_directive.description"
-                            info="'V' + current_directive.version + ' &nbsp; | &nbsp; ' + current_directive.lastUpdate"></card-title>
+                <card-title title="current_directive.title" subtitle="current_directive.description" info="'V' + current_directive.version + ' &nbsp; | &nbsp; ' + current_directive.lastUpdate"></card-title>
             </div>
             <div class="card__item">
                 <div class="m">
                     <p>Example 1:</p>
                 </div>
 
-                <optinomic-logo
-                        size=80
-                        background="white"
-                        fill="#EE3B16"
-                        animation="20"
-                        stroke="white"
-                        stroke-width=2
-                        logo-src="src/optinomic.svg"></optinomic-logo>
+
+                <optinomic-logo size=60 background="white" fill="#EE3B16" animation="20" stroke="white" stroke-width=2 logo-src="directive/optinomic-logo/src/optinomic.svg"></optinomic-logo>
             </div>
         </div>
     </div>
@@ -37,8 +29,7 @@
                     <p>Copy / Paste:</p>
 
                     <p class="m_t">Example 1</p>
-                    <textarea class="form-control t_l" rows="3">&lt{{current_directive_id}} size="50" background="white"
-                        fill="#EE3B16" animation="20" stroke="white" stroke-width=2 logo-src="../src/optinomic.svg"&gt;&lt;/{{current_directive_id}}&gt;</textarea>
+                    <textarea class="form-control t_l" rows="3">&lt{{current_directive_id}} size="50" background="white" fill="#EE3B16" animation="20" stroke="white" stroke-width=2 logo-src="../src/optinomic.svg"&gt;&lt;/{{current_directive_id}}&gt;</textarea>
 
                     <p class="m_t">Example 2</p>
                     <textarea class="form-control t_l" rows="3">&lt{{current_directive_id}} size="50" background="none" fill="green" animation="55" stroke="white" stroke-width=2&gt;&lt;/{{current_directive_id}}&gt;</textarea>
@@ -56,23 +47,57 @@
 
     <div class="card">
 
-        <div class="card__item">
+        <div class="card__item m_t">
+            <div style="padding-top:20px;">
+
+
+                <div class="row ">
+                    <div class="col-md-3">
+                        Text
+                    </div>
+                    <div class="col-md-6" style="min-height:80px; background: url(directive/optinomic-logo/src/stanine.svg);">
+                        <optinomic-logo 
+                        size=80 
+                        background="rgba(255,255,255,0.5)" offset="220" fill="rgba(238,59,22,0.9)" animation="40" stroke="rgba(255,255,255,0.9)" stroke-width=1 radius=0.45 yoverride=0 logo-layer=under ></optinomic-logo>
+                    </div>
+                    <div class="col-md-3">
+                        Text
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        Text
+                    </div>
+                    <div class="col-md-6" style="margin-top:-20px;">
+                        <optinomic-logo size=95 background="rgba(255,255,255,0.5)" offset="35" fill="rgba(238,59,22,0.9)" animation="40" stroke="rgba(255,255,255,0.9)" stroke-width=1 radius=0.45 yoverride=5.25 srcstretch=4.1 logo-layer=under logo-src="directive/optinomic-logo/src/stanine.svg"></optinomic-logo>
+                    </div>
+                    <div class="col-md-3">
+                        Text
+                    </div>
+                </div>
+
+            </div>
+
+            <optinomic-logo size=95 background="rgba(255,255,255,0.5)" offset="35" fill="rgba(238,59,22,0.9)" animation="40" stroke="rgba(255,255,255,0.9)" stroke-width=1 radius=0.45 yoverride=5.25 srcstretch=4.1 logo-layer=under logo-src="directive/optinomic-logo/src/stanine.svg"></optinomic-logo>
+            <optinomic-logo style="margin-top:-47px;" size=95 background="rgba(255,255,255,0.5)" offset="35" fill="orange" animation="25" stroke="rgba(255,255,255,0.9)" stroke-width=1 radius=0.45 yoverride=5.25 srcstretch=4.1 logo-layer=under logo-src="directive/optinomic-logo/src/stanine.svg"></optinomic-logo>
+            <optinomic-logo style="margin-top:-47px;" size=95 background="rgba(255,255,255,0.3)" offset="180" fill="green" animation="55" stroke="rgba(255,255,255,0.9)" stroke-width=0.5 radius=0.45 yoverride=5.25 srcstretch=4.1 logo-layer=under logo-src="directive/optinomic-logo/src/stanine.svg"></optinomic-logo>
+            <optinomic-logo style="margin-top:-47px;" size=95 background="rgba(255,255,255,0.5)" offset="-15" fill="red" animation="5" stroke="rgba(255,255,255,0.9)" stroke-width=1 radius=0.45 yoverride=5.25 srcstretch=4.1 logo-layer=under logo-src="directive/optinomic-logo/src/stanine.svg"></optinomic-logo>
+
             <div class="m">
-                <p>Example 2:  Use it as 'traffic lights'!</p>
+                <p>Example 2: Use it as 'traffic lights'!</p>
             </div>
 
             <div class="row">
                 <div class="col-md-4">
-                    <optinomic-logo size="50" background="none" fill="green" animation="55" stroke="white"
-                                    stroke-width=1></optinomic-logo>
+                    <optinomic-logo size="50" background="none" fill="green" animation="55" stroke="white" stroke-width=1></optinomic-logo>
                 </div>
                 <div class="col-md-4">
-                    <optinomic-logo size="50" background="none" fill="orange" animation="25" stroke="white"
-                                    stroke-width=1></optinomic-logo>
+                    <optinomic-logo size="50" background="none" fill="orange" animation="25" stroke="white" stroke-width=1></optinomic-logo>
                 </div>
                 <div class="col-md-4">
-                    <optinomic-logo size="50" background="none" fill="red" animation="5" stroke="white"
-                                    stroke-width=1></optinomic-logo>
+                    <optinomic-logo size="50" background="none" fill="red" animation="5" stroke="white" stroke-width=1></optinomic-logo>
                 </div>
             </div>
 
@@ -81,14 +106,10 @@
 
 
         <div class="card__item">
-            <p>Other content goes here / Hier wird Ihre Auswertung dargestellt :: Lorem ipsum dolor sit amet,
-                consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. Stet clita kasd gubergren. Lorem ipsum dolor sit amet. Stet
-                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <p>Other content goes here / Hier wird Ihre Auswertung dargestellt :: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Stet clita kasd gubergren. Lorem ipsum dolor sit amet. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
         </div>
     </div>
 
 
 </div>
 <h3 class="m">&nbsp;</h3>
-
