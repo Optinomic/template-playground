@@ -1,200 +1,265 @@
 angular.module('optinomic').directive('scale', function() {
-    'use strict';
-
-    var logo_width_scale = 3.25;
-    var logo_width = 250;
-    var logo_centre_x = 25 / 2;
-    var logo_centre_y = 25 / 2;
-
-
-    function preLink(scope, elm, as) {
-        var size = as.size || 100;
-        var logo_src = as.logoSrc || null;
-
-        var svg_height = size;
-        var svg_width = logo_src ? logo_width_scale * size : size;
-
-        scope.topsvg = elm.children()[0];
-        $(elm).css("width", svg_width).css("height", svg_height);
-        scope.svg = d3.select(scope.topsvg)
-            .attr("width", svg_width).attr("height", svg_height)
-            .append("g");
-    }
-
-    function postLink(scope, elm, as) {
-        var size = as.size || 100;
-        var logo_src = as.logoSrc || null;
-
-
-
-        function invert(xi, yi, ri) {
-            var rad = Math.sqrt(Math.pow(xinvc - xi, 2) + Math.pow(yinvc - yi, 2));
-            var rnear = rad - ri,
-                rfar = rad + ri;
-            var rcc = ((1 / rfar) + (1 / rnear)) / 2;
-            var rc = Math.abs(((1 / rfar) - (1 / rnear)) / 2);
-            var xc = 0,
-                yc = 0;
-            if (rad !== 0) {
-                xc = xinvc + (rcc / rad) * (xi - xinvc);
-                yc = yinvc + (rcc / rad) * (yi - yinvc);
-            }
-            return {
-                x: xc,
-                y: yc,
-                r: rc
-            };
-        }
-
-        function main_circles(show_inner) {
-            var ri = (1 + Math.sin(piN)) / (1 - Math.sin(piN));
-            var circin = invert(0, 0, ri);
-            var outer_circle = {
-                x: 0,
-                y: 0,
-                r: outer_circle_radius,
-                stroke: outer_circle_stroke,
-                strokeWidth: outer_circle_stroke_width,
-                fill: outer_circle_fill
-            };
-            var inner_circle = {
-                x: sf * (circin.x - xc0),
-                y: sf * (circin.y - yc0),
-                r: sf * circin.r,
-                stroke: inner_circle_stroke,
-                strokeWidth: inner_circle_stroke_width
-            };
-            return show_inner ? [outer_circle, inner_circle] : [outer_circle];
-        }
-
-        function ring_outlines(az) {
-            var ri = Math.sin(piN) / (1 - Math.sin(piN));
-            var circles = [];
-            for (var i = 0; i < ncircles; ++i) {
-                var xi = (1 + ri) * Math.cos(az + 2 * i * Math.PI / ncircles);
-                var yi = (1 + ri) * Math.sin(az + 2 * i * Math.PI / ncircles);
-                var c = invert(xi, yi, ri);
-                circles.push({
-                    x: sf * (c.x - xc0),
-                    y: sf * (c.y - yc0),
-                    r: sf * c.r,
-                    stroke: moving_circle_stroke,
-                    strokeWidth: moving_circle_stroke_width,
-                    fill: moving_circle_fill
-                });
-            }
-            return circles;
-        }
-
-        function circles(g, d, first) {
-            var cs;
-            if (first) {
-                cs = g.selectAll("circle").data(d).enter().append("circle");
-            } else {
-                cs = g.selectAll("circle").data(d);
-            }
-
-            cs.attr("transform",
-                function(d) {
-                    return "translate(" + d.x + "," + d.y + ")";
-                })
-                .attr("r", function(d) {
-                    return d.r;
-                })
-                .attr("stroke", function(d) {
-                    return d.stroke || "black";
-                })
-                .attr("stroke-width", function(d) {
-                    return d.strokeWidth || 2;
-                })
-                .attr("fill", function(d) {
-                    return d.fill || "none";
-                });
-        }
-
-
-        var debug = as.hasOwnProperty("debug");
-
-        var outer_circle_stroke = debug ? "black" : "none";
-        var outer_circle_stroke_width = debug ? 2 : 0;
-        var outer_circle_fill = as.background || "#FBFBFB";
-
-        var inner_circle_stroke_width = debug ? 2 : 0;
-        var inner_circle_stroke = debug ? "black" : "none";
-
-        var moving_circle_stroke = as.stroke || "#FFA593";
-        var moving_circle_fill = as.fill || "#EE3B16";
-        var moving_circle_stroke_width = as.strokeWidth || 2;
-
-        var svg_height = size;
-        var svg_width = logo_src ? logo_width_scale * size : size;
-
-        var outer_circle_radius = 0.95 * svg_height / 2;
-        var outer_circle_x = svg_height / 2,
-            outer_circle_y = svg_height / 2;
-
-        var ncircles = 12;
-        var offset_distance = 56,
-            offset_angle = -62;
-
-        var animation_speed = as.animation || 30;
-
-        var piN = Math.sin(Math.PI / ncircles);
-        var rinvc = offset_distance / 100;
-        var xinvc = rinvc * Math.cos(offset_angle / 180.0 * Math.PI);
-        var yinvc = rinvc * Math.sin(offset_angle / 180.0 * Math.PI);
-        var circout = invert(0, 0, 1);
-        var xc0 = circout.x,
-            yc0 = circout.y;
-        var sf = outer_circle_radius / circout.r;
-        var start = Date.now();
-        var inner_circ = main_circles(true)[1];
-
-        var xlat = "translate(" + outer_circle_x + "," + outer_circle_y + ")";
-        scope.svg.attr("transform", xlat).append("g");
-        var maing = scope.svg.append("g");
-        var ringg = scope.svg.append("g");
-
-        if (logo_src) {
-            d3.xml(logo_src, "image/svg+xml", function(xml) {
-                var node = document.importNode(xml.documentElement, true);
-                var logog = scope.svg.append("g");
-                logog.node().appendChild(node);
-                var zeroxlat = "translate(" + (-logo_centre_x) + "," +
-                    (-logo_centre_y) + ")";
-                var ctrxlat = "translate(" + inner_circ.x + "," + inner_circ.y + ")";
-                var scale_factor = size / 200 * 3;
-                var scale = "scale(" + scale_factor + ")";
-                logog.attr("transform", ctrxlat + scale + zeroxlat);
-            });
-        }
-
-        circles(maing, main_circles(debug), true);
-        circles(ringg, ring_outlines(0.0), true);
-
-        if (animation_speed !== "off") {
-            d3.timer(function() {
-                var az = -2 * Math.PI * (Date.now() - start) / animation_speed / 1000;
-                circles(ringg, ring_outlines(az), false);
-            });
-        }
-
-    }
-
     return {
         restrict: 'E',
-        template: ['<div class="scale">',
-            '<svg>',
-            '</svg>',
-            '</div>'
-        ].join(''),
         replace: true,
-        scope: true,
-        compile: function(elm, as, trans) {
-            return {
-                pre: preLink,
-                post: postLink
-            };
+        transclude: true,
+        scope: {
+            myscale_data: '=scaledata',
+            myscale: '=scale'
+        },
+
+        template:
+        '<div class="m">' + 
+            '<div ng-show="myscale === 9">' + 
+                '<div class="t_c">' + 
+                    '<p style="margin-top: 5px; margin-bottom: 5px;">' + 
+                        '<small>' + 
+                            'Normalbereich' + 
+                        '</small>' + 
+                        '<br>{{myscale_data.population}}' + 
+                    '</p>' + 
+                '</div>' + 
+                '<table class="table table-condensed">' + 
+                    '<!-- Header -->' + 
+                    '<tr class="beschriftung_klein">' + 
+                        '<td class="hidden-xs t_r" style="width: 25%">' + 
+                            '<p style="margin-left: 5px; margin-right: 5px;">' + 
+                                'Stanine' + 
+                                '<br>%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_1 t_c b_r">' + 
+                            '<p>' + 
+                                '1' + 
+                                '<br>4%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '2' + 
+                                '<br>7%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '3' + 
+                                '<br>12%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<p>' + 
+                                '4' + 
+                                '<br>17%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<p>' + 
+                                '5' + 
+                                '<br>20%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<p>' + 
+                                '6' + 
+                                '<br>17%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '7' + 
+                                '<br>12%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '8' + 
+                                '<br>7%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_1 t_c">' + 
+                            '<p>' + 
+                                '9' + 
+                                '<br>4%' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="hidden-xs t_l" style="width: 25%">' + 
+                            '<p style="margin-left: 5px; margin-right: 5px;">' + 
+                                '<small>' + 
+                                    'Stanine' + 
+                                    '<br>%' + 
+                                '</small>' + 
+                            '</p>' + 
+                        '</td>' + 
+                    '</tr>' + 
+                    '<!-- Results -->' + 
+                    '<tr ng-repeat="result in myscale_data.results">' + 
+                        '<td class="hidden-xs t_r" style="width: 25%">' + 
+                            '<div class="scale_description">' + 
+                                '{{result.question}}' + 
+                                '<small>' + 
+                                    '{{result.sub_left}}' + 
+                                '</small>' + 
+                            '</div>' + 
+                        '</td>' + 
+                        '<td class="bg_1 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 1" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 2" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 3" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 4" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 5" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 6" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 7" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<div ng-show="result.stanine === 8" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="bg_1 t_c">' + 
+                            '<div ng-show="result.stanine === 9" class="scale_result">X</div>' + 
+                        '</td>' + 
+                        '<td class="hidden-xs t_l" style="width: 25%">' + 
+                            '<div class="scale_description">' + 
+                                '{{result.question}}' + 
+                                '<small>' + 
+                                    '{{result.sub_right}}' + 
+                                '</small>' + 
+                            '</div>' + 
+                        '</td>' + 
+                    '</tr>' + 
+                    '<!-- Footer -->' + 
+                    '<tr class="beschriftung_klein text-info hidden-xs">' + 
+                        '<td class="hidden-xs t_r" style="width: 25%">' + 
+                            '<p style="margin-left: 5px; margin-right: 5px;">' + 
+                                '%' + 
+                                '<br>Stanine' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_1 t_c b_r">' + 
+                            '<p>' + 
+                                '4%' + 
+                                '<br>1' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '7%' + 
+                                '<br>2' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '12%' + 
+                                '<br>3' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<p>' + 
+                                '17%' + 
+                                '<br>4' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<p>' + 
+                                '20%' + 
+                                '<br>5' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_3 t_c b_r">' + 
+                            '<p>' + 
+                                '17%' + 
+                                '<br>6' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '12%' + 
+                                '<br>7' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_2 t_c b_r">' + 
+                            '<p>' + 
+                                '7%' + 
+                                '<br>8' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="bg_1 t_c">' + 
+                            '<p>' + 
+                                '4%' + 
+                                '<br>9' + 
+                            '</p>' + 
+                        '</td>' + 
+                        '<td class="hidden-xs t_l" style="width: 25%">' + 
+                            '<p style="margin-left: 5px; margin-right: 5px;">' + 
+                                '%' + 
+                                '<br>Stanine' + 
+                            '</p>' + 
+                        '</td>' + 
+                    '</tr>' + 
+                '</table>' + 
+                '<div class="hidden-xs t_c">' + 
+                    '<p style="margin-top: -15px; margin-bottom: 5px;">' + 
+                        '{{myscale_data.population}}' + 
+                        '<br>' + 
+                        '<small>' + 
+                            'Normalbereich' + 
+                        '</small>' + 
+                    '</p>' + 
+                '</div>' + 
+                '<div class="visible-xs" style="margin-top: -15px; margin-bottom: 5px;">' + 
+                    '<div ng-repeat="result in myscale_data.results">' + 
+                        '<div class="row b_t">' + 
+                            '<div class="col-xs-12 t_c m">' + 
+                                '{{result.question}} &nbsp;&nbsp;({{result.stanine}})' + 
+                            '</div>' + 
+                        '</div>' + 
+                        '<div class="row">' + 
+                            '<div class="col-xs-6 t_r">' + 
+                                '<small>' + 
+                                    '{{result.sub_left}}' + 
+                                '</small>' + 
+                            '</div>' + 
+                            '<div class="col-xs-6">' + 
+                                '<small>' + 
+                                    '{{result.sub_right}}' + 
+                                '</small>' + 
+                            '</div>' + 
+                        '</div>' + 
+                    '</div>' + 
+                '</div>' + 
+            '</div>' + 
+        '</div>',
+
+        //templateUrl: 'directive/scale/scale.html',
+
+        link: function(scope, element, attrs, ngModel) {
+
+
+
+            function updateStuff() {
+
+                // console.log('scale => ', scope.myscale);
+                // console.log('results => ', scope.myscale_data);
+
+            }
+
+            updateStuff();
+
+            // Watch for changes.
+            //scope.$watch('mydata', function() {
+            //    updateStuff();
+            //}, true);
+
         }
     };
 });
